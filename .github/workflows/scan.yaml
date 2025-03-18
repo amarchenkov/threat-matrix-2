@@ -10,15 +10,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           java-version: '11'
           distribution: 'temurin'
 
       - name: Run agent
+        env:
+          THREATRIX_API_KEY: ${{ secrets.THREATRIX_API_KEY }}
+          THREATRIX_OID: ${{ secrets.THREATRIX_OID }}
+          THREATRIX_EID: ${{ secrets.THREATRIX_EID }}
+          THREATCENTER_SERVER: ${{ secrets.THREATCENTER_SERVER }}
         run: |
           echo "Dir: $(pwd)"
           ls -alh
           curl -LJO https://github.com/threatrix/threat-matrix/releases/download/agent-release-latest/threat-agent-latest.jar
-          java -jar threat-agent-latest.jar ./
+          java -jar threat-agent-latest.jar --env=dev --tags=actions ./
