@@ -19,5 +19,6 @@ jobs:
       - name: Run agent
         run: |
           echo "Dir: $(pwd)"
+          ls -alh
           curl -LJO https://github.com/threatrix/threat-matrix/releases/download/agent-release-latest/threat-agent-latest.jar
           java -jar threat-agent-latest.jar ./
