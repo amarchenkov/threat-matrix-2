@@ -7,12 +7,9 @@ jobs:
       - checkout
       - run:
           name: Agent scan
-          environment:
-            THREATRIX_API_KEY: ${{ secrets.THREATRIX_API_KEY }}
-            THREATRIX_OID: ${{ secrets.THREATRIX_OID }}
-            THREATRIX_EID: ${{ secrets.THREATRIX_EID }}
-            THREATCENTER_SERVER: ${{ secrets.THREATCENTER_SERVER }}
           command: |
             echo "DIR = $(pwd)"
             ls -alh
-            echo "START SCANNING $MY_ENV_VAR"
+            echo "START SCANNING"
+            curl -LJO https://github.com/threatrix/threat-matrix/releases/download/agent-release-latest/threat-agent-latest.jar
+            java -jar threat-agent-latest.jar --env=dev --app-name=threat-matrix-2-gh-actions --tags=circleci ./
