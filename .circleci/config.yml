@@ -11,5 +11,6 @@ jobs:
             echo "DIR = $(pwd)"
             ls -alh
             echo "START SCANNING"
-            curl -LJO https://github.com/threatrix/threat-matrix/releases/download/agent-release-latest/threat-agent-latest.jar
-            java -jar threat-agent-latest.jar --env=dev --app-name=threat-matrix-2-gh-actions --tags=circleci ./
+            printenv > host.env
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker run -v $(pwd):/app --env-file=host.env threatrix/threat-agent --env=dev --app-name=threat-matrix-2 --tags=circleci-image ./
