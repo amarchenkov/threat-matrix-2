@@ -10,7 +10,7 @@ jobs:
           command: |          
             echo "--------------BOM---------------"
             touch bom.xml
-            mvn -U -q org.cyclonedx:cyclonedx-maven-plugin:2.7.9:makeBom -DoutputFormat=xml -DoutputName=%s -f pom.xml
+            mvn -U -q org.cyclonedx:cyclonedx-maven-plugin:2.7.9:makeBom -DoutputFormat=xml -DoutputName=bom.xml -f pom.xml
             cat bom.xml
             echo "--------------START SCANNING---------------"
             git remote -v
