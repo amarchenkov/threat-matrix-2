@@ -13,5 +13,4 @@ jobs:
             echo "START SCANNING"
             printenv > host.env
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-            docker pull alpine:latest
-            docker run -v $(pwd):/app --env-file=host.env threatrix/threat-agent --env=dev --app-name=threat-matrix-2 --tags=circleci-image ./
+            docker run -v $(pwd):/app threatrix/threat-agent --oid=$THREATRIX_OID --eid=$THREATRIX_EID --api-key=$THREATRIX_API_KEY --server-url=$THREATCENTER_SERVER --verbose --env=dev --app-name=threat-matrix-2 --tags=circleci-image ./
