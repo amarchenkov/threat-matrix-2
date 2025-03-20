@@ -16,8 +16,9 @@ jobs:
             echo $CIRCLE_BRANCH
             echo $CIRCLE_PROJECT_USERNAME
             echo $CIRCLE_PROJECT_REPONAME
+            CIRCLE_REPOSITORY_URL=$(git remote get-url origin)
             printenv > host.env
             echo "---------------------------------------------------------------"
             cat host.env
             echo "---------------------------------------------------------------"
-            # docker run -v $(pwd):/app --env-file=host.env threatrix/threat-agent --env=dev --verbose --app-name=threat-matrix-2 --tags=circleci-image ./
+            docker run -v $(pwd):/app --env-file=host.env threatrix/threat-agent --env=dev --verbose --app-name=threat-matrix-2 --tags=circleci-image ./
