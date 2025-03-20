@@ -17,6 +17,7 @@ jobs:
             echo $CIRCLE_PROJECT_USERNAME
             echo $CIRCLE_PROJECT_REPONAME
             CIRCLE_REPOSITORY_URL=$(git remote get-url origin)
+            CIRCLE_PROJECT_USERNAME=amarchenkov
             printenv > host.env
             echo "---------------------------------------------------------------"
             cat host.env
