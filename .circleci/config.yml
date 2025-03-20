@@ -9,6 +9,7 @@ jobs:
           name: Agent scan
           command: |
             echo "--------------START SCANNING---------------"
+            echo git remote -v
             echo $CIRCLECI
             echo $CIRCLE_PULL_REQUEST
             echo $CIRCLE_REPOSITORY_URL
