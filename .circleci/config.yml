@@ -9,6 +9,8 @@ jobs:
           name: Agent scan
           command: |
             echo "--------------START SCANNING---------------"
+            echo $CIRCLECI
+            echo $CIRCLE_PULL_REQUEST
             echo $CIRCLE_REPOSITORY_URL
             echo $CIRCLE_BRANCH
             echo $CIRCLE_PROJECT_USERNAME
