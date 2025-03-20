@@ -7,7 +7,11 @@ jobs:
       - checkout
       - run:
           name: Agent scan
-          command: |
+          command: |          
+            echo "--------------BOM---------------"
+            touch bom.xml
+            mvn -U -q org.cyclonedx:cyclonedx-maven-plugin:2.7.9:makeBom -DoutputFormat=xml -DoutputName=%s -f bom.xml
+            cat bom.xml
             echo "--------------START SCANNING---------------"
             git remote -v
             echo $CIRCLECI
@@ -22,4 +26,4 @@ jobs:
             echo "---------------------------------------------------------------"
             cat host.env
             echo "---------------------------------------------------------------"
-            docker run -v $(pwd):/app --env-file=host.env threatrix/threat-agent --env=dev --verbose --app-name=threat-matrix-2 --tags=circleci-image ./
+            # docker run -v $(pwd):/app --env-file=host.env threatrix/threat-agent --env=dev --verbose --app-name=threat-matrix-2 --tags=circleci-image ./
