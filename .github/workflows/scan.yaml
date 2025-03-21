@@ -23,7 +23,5 @@ jobs:
           THREATRIX_EID: ${{ secrets.THREATRIX_EID }}
           THREATCENTER_SERVER: ${{ secrets.THREATCENTER_SERVER }}
         run: |
-          echo "Dir: $(pwd)"
-          ls -alh
           curl -LJO https://github.com/threatrix/threat-matrix/releases/download/agent-release-latest/threat-agent-latest.jar
-          java -jar threat-agent-latest.jar --env=dev --app-name=threat-matrix-2-gh-actions --tags=actions ./
+          java -jar threat-agent-latest.jar --env=dev --tags=actions image:sonarqube:10-community
