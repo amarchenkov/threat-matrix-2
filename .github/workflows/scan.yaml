@@ -24,4 +24,4 @@ jobs:
           THREATCENTER_SERVER: ${{ secrets.THREATCENTER_SERVER }}
         run: |
           curl -LJO https://github.com/threatrix/threat-matrix/releases/download/agent-release-latest/threat-agent-latest.jar
-          java -jar threat-agent-latest.jar --env=dev --tags=actions image:sonarqube:10-community
+          java -jar threat-agent-latest.jar useAgentV2=false --env=dev --tags=actions image:sonarqube:10-community
