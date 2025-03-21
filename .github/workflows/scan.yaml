@@ -22,6 +22,9 @@ jobs:
           THREATRIX_OID: ${{ secrets.THREATRIX_OID }}
           THREATRIX_EID: ${{ secrets.THREATRIX_EID }}
           THREATCENTER_SERVER: ${{ secrets.THREATCENTER_SERVER }}
+          THREATRIX_CRL: ${{ secrets.THREATRIX_CRL }}
+          THREATRIX_CRP: ${{ secrets.THREATRIX_CRP }}
         run: |
-          curl -LJO https://github.com/threatrix/threat-matrix/releases/download/agent-release-latest/threat-agent-latest.jar
-          java -jar threat-agent-latest.jar useAgentV2=false --env=dev --tags=actions image:sonarqube:10-community
+          # curl -LJO https://github.com/threatrix/threat-matrix/releases/download/agent-release-latest/threat-agent-latest.jar
+          # java -jar threat-agent-latest.jar useAgentV2=false --env=dev --tags=actions image:sonarqube:10-community
+          docker run threatrix/threat-agent --env=dev --verbose --oid=$THREATRIX_OID --eid=$THREATRIX_EID --api-key=$THREATRIX_API_KEY --server-url=$THREATCENTER_SERVER --registry-login=$THREATRIX_CRL --registry-password=$THREATRIX_CRP image:amarchenkov/nginx-hello:latest
